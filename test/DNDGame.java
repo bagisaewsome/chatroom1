@@ -13,6 +13,7 @@ public class DNDGame{
    public static JFrame fframe = new JFrame("Play");
    public static JFrame frame = new JFrame("choose ur game");
    public static JPanel panel = new JPanel();
+   public static JFrame newfam = new JFrame("login");
 
    public static void main(String[] args){
    String SheetName = "", GameName = "";
@@ -20,6 +21,8 @@ public class DNDGame{
         frame.setSize(450, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        
         /* Creating panel. This is same as a div tag in HTML
          * We can create several panels and add them to specific 
          * positions in a JFrame. Inside panels we can add text 
@@ -30,7 +33,6 @@ public class DNDGame{
         /* calling user defined method for adding components
          * to the panel.
          */
-         JFrame newfam = new JFrame("login");
          newfam.setSize(450, 250);
         newfam.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -75,11 +77,12 @@ public class DNDGame{
        // sub.setBackground(new Color(35, 45, 155));
         sub.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent ae){
-                File userr = new File(("User_" +Username.getText()));
+                File userr = new File(("J:\\Chatroom\\test\\users\\User_" +Username.getText()));
           if (userr.exists()){
           try{
           Scanner wordReader = new Scanner(userr);
-          if((wordReader.nextLine()).equals(Pass.getText())){
+          String passs = encrypt(Pass.getText());
+          if((wordReader.nextLine()).equals(passs)){
           JOptionPane.showMessageDialog(frame, "login complete");
           usernam = Username.getText();
           panel.setEnabled(false);
@@ -101,7 +104,8 @@ public class DNDGame{
          else{
          try{
            PrintWriter out = new PrintWriter(new FileWriter(userr, true));
-           out.println(Pass.getText());
+           String passs = encrypt(Pass.getText());
+           out.println(passs);
            out.close();
            usernam = Username.getText();
            JOptionPane.showMessageDialog(frame, "new login created");
@@ -127,6 +131,7 @@ public class DNDGame{
          panel.revalidate();
          panel.repaint();
       panel.setLayout(null);
+      newfam.setVisible(false);
       //panel.setBackground(new Color(17, 35, 8));
         // Creating JLabel
         JLabel userLabel = new JLabel("Chatroom Name");
@@ -312,7 +317,23 @@ public class DNDGame{
       outt.print("<div stytle= \"font-size:125%\"> " + actroll + "</div>");
       outt.close();
       }
-  
+   public static String encrypt(String encrypt){
+   String toEncr = encrypt;
+   int keylength = 5;
+   String ciphertext = "";
+   String key = "im_encrypting";
+    for (int i=0; i<toEncr.length(); i++) {
+   int asciiPT = (int) toEncr.charAt(i);
+    int asciiK = key.charAt(((int)(i%keylength)));
+   System.out.println(asciiK + ":key");
+   int asciishifted =((asciiPT- asciiK)%26) + 65;
+   System.out.println(asciishifted);
+   char cipherChar = (char)asciishifted;
+   ciphertext = ciphertext + cipherChar;
+      }
+      System.out.println(ciphertext);
+      return ciphertext;
+   }
 }
 
 
