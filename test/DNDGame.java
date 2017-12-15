@@ -51,7 +51,9 @@ public class DNDGame{
          panelll.repaint();
          panelll.setLayout(null);
          
-         JLabel info = new JLabel("if you do not hava an acount, this will create one");
+         JLabel info = new JLabel("if you do not hava an acount, filling this in will create one");
+         info.setBounds(10,110,400,50);
+         panelll.add(info);
          
          JLabel userLabel = new JLabel("username");
           userLabel.setBounds(10,20,80,25);
@@ -135,13 +137,13 @@ public class DNDGame{
       //panel.setBackground(new Color(17, 35, 8));
         // Creating JLabel
         JLabel userLabel = new JLabel("Chatroom Name");
-        userLabel.setBounds(10,20,80,25);
+        userLabel.setBounds(10,20,120,25);
         panel.add(userLabel);
 
         /* Creating text field where user is supposed to
          * enter user name.
          */
-        GameNam.setBounds(100,20,165,25);
+        GameNam.setBounds(130,20,165,25);
         panel.add(GameNam);
         
           
